@@ -23,7 +23,7 @@ export const composeClassPreview: ComposePreview = (layer: ILayer, translate: (i
     width: umlPackage.bounds.width,
     height: umlPackage.bounds.height,
   };
-  elements.push(umlPackage);
+  //elements.push(umlPackage);
 
   // UML Class
   const umlClass = new UMLClass({ name: translate('packages.ClassDiagram.Class') });
@@ -54,7 +54,7 @@ export const composeClassPreview: ComposePreview = (layer: ILayer, translate: (i
     },
   });
 
-  umlClass.ownedElements = [umlClassAttribute.id, umlClassMethod.id];
+  umlClass.ownedElements = [umlClassAttribute.id /*, umlClassMethod.id*/];
   elements.push(...(umlClass.render(layer, [umlClassAttribute, umlClassMethod]) as UMLElement[]));
 
   // UML Abstract Class
@@ -85,7 +85,7 @@ export const composeClassPreview: ComposePreview = (layer: ILayer, translate: (i
     },
   });
   umlAbstract.ownedElements = [umlAbstractAttribute.id, umlAbstractMethod.id];
-  elements.push(...(umlAbstract.render(layer, [umlAbstractAttribute, umlAbstractMethod]) as UMLElement[]));
+  //elements.push(...(umlAbstract.render(layer, [umlAbstractAttribute, umlAbstractMethod]) as UMLElement[]));
 
   // UML Interface
   const umlInterface = new UMLInterface({
@@ -118,7 +118,7 @@ export const composeClassPreview: ComposePreview = (layer: ILayer, translate: (i
     },
   });
   umlInterface.ownedElements = [umlInterfaceAttribute.id, umlInterfaceMethod.id];
-  elements.push(...(umlInterface.render(layer, [umlInterfaceAttribute, umlInterfaceMethod]) as UMLElement[]));
+  //elements.push(...(umlInterface.render(layer, [umlInterfaceAttribute, umlInterfaceMethod]) as UMLElement[]));
 
   // UML Enumeration
   const umlEnumeration = new UMLEnumeration({
@@ -161,9 +161,7 @@ export const composeClassPreview: ComposePreview = (layer: ILayer, translate: (i
     },
   });
   umlEnumeration.ownedElements = [umlEnumerationCase1.id, umlEnumerationCase2.id, umlEnumerationCase3.id];
-  elements.push(
-    ...(umlEnumeration.render(layer, [umlEnumerationCase1, umlEnumerationCase2, umlEnumerationCase3]) as UMLElement[]),
-  );
+  //elements.push(...(umlEnumeration.render(layer, [umlEnumerationCase1, umlEnumerationCase2, umlEnumerationCase3]) as UMLElement[]),);
 
   return elements;
 };

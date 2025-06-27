@@ -6,23 +6,26 @@ const container = document.getElementById('apollon')!;
 let editor: Apollon.ApollonEditor | null = null;
 let options: Apollon.ApollonOptions = {
   model: JSON.parse(window.localStorage.getItem('apollon')!),
-  colorEnabled: true,
+  colorEnabled: false,
   scale: 0.8,
 };
 
 export const onChange = (event: MouseEvent) => {
+  console.log("onChange");
   const { name, value } = event.target as HTMLSelectElement;
   options = { ...options, [name]: value };
   render();
 };
 
 export const onSwitch = (event: MouseEvent) => {
+  console.log("onSwitch");
   const { name, checked: value } = event.target as HTMLInputElement;
   options = { ...options, [name]: value };
   render();
 };
 
 export const save = () => {
+  console.log("save");
   if (!editor) return;
 
   const model: Apollon.UMLModel = editor.model;
@@ -31,12 +34,23 @@ export const save = () => {
   return options;
 };
 
+export const model = () => {
+  console.log("model");
+  if (editor !== null) {
+    return JSON.stringify(editor.model);
+  }
+  return "";
+
+}
+
 export const clear = () => {
+  console.log("clear");
   localStorage.removeItem('apollon');
   options = { ...options, model: undefined };
 };
 
 export const setTheming = (theming: string) => {
+  console.log("setTheming:"+theming);
   const root = document.documentElement;
   const selectedButton = document.getElementById(
     theming === 'light' ? 'theming-light-mode-button' : 'theming-dark-mode-button',
@@ -54,6 +68,7 @@ export const setTheming = (theming: string) => {
 };
 
 export const draw = async (mode?: 'include' | 'exclude') => {
+  console.log("draw");
   if (!editor) return;
 
   const filter: string[] = [
@@ -74,6 +89,7 @@ export const draw = async (mode?: 'include' | 'exclude') => {
 };
 
 const render = () => {
+  console.log("render");
   save();
   if (editor) {
     editor.destroy();
