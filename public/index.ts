@@ -44,7 +44,6 @@ export const model = () => {
 }
 
 export const clear = () => {
-  console.log("clear");
   localStorage.removeItem('apollon');
   options = { ...options, model: undefined };
 };
@@ -68,7 +67,6 @@ export const setTheming = (theming: string) => {
 };
 
 export const draw = async (mode?: 'include' | 'exclude') => {
-  console.log("draw");
   if (!editor) return;
 
   const filter: string[] = [
