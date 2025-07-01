@@ -57,8 +57,9 @@ aside.sidebar section>div {
  * Navbar
  */
 
+ /*
 .navbar {
-  background-color: #343a40 !important;
+  background-color: #e7ecf1 !important;
   line-height: 1.5;
   font-size: 0.9rem;
   font-weight: 300;
@@ -85,7 +86,7 @@ aside.sidebar section>div {
 .navbar-version {
   font-size: 10px;
   color: #ccc;
-}
+}*/
 
 /**
  * Header

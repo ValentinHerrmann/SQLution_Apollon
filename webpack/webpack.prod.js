@@ -7,7 +7,7 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: false,
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
   },
 
   plugins: [
