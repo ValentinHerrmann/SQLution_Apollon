@@ -11,21 +11,18 @@ let options: Apollon.ApollonOptions = {
 };
 
 export const onChange = (event: MouseEvent) => {
-  console.log("onChange");
   const { name, value } = event.target as HTMLSelectElement;
   options = { ...options, [name]: value };
   render();
 };
 
 export const onSwitch = (event: MouseEvent) => {
-  console.log("onSwitch");
   const { name, checked: value } = event.target as HTMLInputElement;
   options = { ...options, [name]: value };
   render();
 };
 
 export const save = () => {
-  console.log("save");
   if (!editor) return;
 
   const model: Apollon.UMLModel = editor.model;
@@ -35,12 +32,21 @@ export const save = () => {
 };
 
 export const model = () => {
-  console.log("model");
   if (editor !== null) {
-    return JSON.stringify(editor.model);
+    return editor.model;
   }
   return "";
+}
 
+export const loadModel = (mod) => {
+
+  if (editor !== null) {
+    editor.model = mod;
+    save();
+  }
+  else {
+    console.log("Couldn't load model to Apollon. Editor is null")
+  }
 }
 
 export const clear = () => {
@@ -49,7 +55,6 @@ export const clear = () => {
 };
 
 export const setTheming = (theming: string) => {
-  console.log("setTheming:"+theming);
   const root = document.documentElement;
   const selectedButton = document.getElementById(
     theming === 'light' ? 'theming-light-mode-button' : 'theming-dark-mode-button',
@@ -86,8 +91,14 @@ export const draw = async (mode?: 'include' | 'exclude') => {
   window.open(svgBlobURL);
 };
 
+export const getSvg = async () => {
+  if (!editor) return null;
+  const { svg }: Apollon.SVG = await editor.exportAsSVG();
+  const svgBlob = new Blob([svg], { type: 'image/svg+xml' });
+  return svgBlob;
+}
+
 const render = () => {
-  console.log("render");
   save();
   if (editor) {
     editor.destroy();
